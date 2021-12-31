@@ -80,13 +80,3 @@
 }
 
 // /dev/hRXKWVI/.magisk/mirror/system_root
-
-// terminate app with a toast
-
-Log.d("Root", "is the device rooted : " + " " + isRooted() + " " + "and" + " " + "is the device emulator : " + " " + isEmulator());
-
-        if(isRooted()){
-            Toast.makeText(LoginActivity.this, "Device is rooted or Emulator closing now.", Toast.LENGTH_LONG).show();
-            finish();
-
-        }
