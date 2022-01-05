@@ -80,3 +80,41 @@
 }
 
 // /dev/hRXKWVI/.magisk/mirror/system_root
+
+// terminate app with a toast
+
+Log.d("Root", "is the device rooted : " + " " + isRooted() + " " + "and" + " " + "is the device emulator : " + " " + isEmulator());
+
+    if(isRooted()){
+            Toast.makeText(LoginActivity.this, "Device is rooted or Emulator closing now.", Toast.LENGTH_LONG).show();
+            AlertDialog.Builder builder
+                    = new AlertDialog
+                    .Builder(LoginActivity.this);
+            builder.setMessage("Your device is rooted or you are using an emulator please use a different device.");
+
+            builder.setTitle("Alert !");
+
+            // Set Cancelable false
+            // for when the user clicks on the outside
+            // the Dialog Box then it will remain show
+            builder.setCancelable(false);
+            builder
+                    .setPositiveButton(
+                            "Close",
+                            new DialogInterface
+                                    .OnClickListener() {
+
+                                @Override
+                                public void onClick(DialogInterface dialog,
+                                                    int which)
+                                {
+
+                                    finish();
+                                }
+                            });
+            AlertDialog alertDialog = builder.create();
+
+            // Show the Alert Dialog box
+            alertDialog.show();
+
+        }

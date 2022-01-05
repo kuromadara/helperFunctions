@@ -1,0 +1,24 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.css" rel="stylesheet" />
+
+<select class="a" multiple="multiple">
+  <option></option>
+  <option value="10">foo</option>
+  <option value="2">bar</option>
+  <option value="3">foo bar</option>
+</select>
+
+<script>
+	$('select').select2()
+
+	$('select').on('change', function(e) {
+	  var data =  $(".a").val();
+	  i = data.length;
+	  sum = 0;
+	  while(i--)
+		sum += parseFloat(data[i]) || 0;
+		
+		console.log(sum)
+	});
+
+</script>
