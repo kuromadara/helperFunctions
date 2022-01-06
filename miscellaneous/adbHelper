@@ -1,0 +1,7 @@
+# to log an app
+
+adb logcat | findstr com.packagename
+
+# to log any string
+
+adb logcat | findstr anything

@@ -1,0 +1,7 @@
+# load to databasename
+
+mysql -u username -p databasename < filepath/filename.sql
+
+#load from databasename
+
+mysqldump -u username -p database_name > data-dump.sql

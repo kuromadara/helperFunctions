@@ -1,0 +1,8 @@
+# max post get size can stop input form data to fix
+# change in php.ini and phpForApache.ini
+
+post_max_size
+
+max_input_vars
+
+# reference link : https://stackoverflow.com/questions/2364840/what-is-the-size-limit-of-a-post-request
