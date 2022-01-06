@@ -5,3 +5,7 @@ adb logcat | findstr com.packagename
 # to log any string
 
 adb logcat | findstr anything
+
+# detailed link
+
+https://stackoverflow.com/questions/6854127/filter-logcat-to-get-only-the-messages-from-my-application-in-android
