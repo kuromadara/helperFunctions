@@ -1,5 +1,12 @@
-php artisan make:migration --table = processshiftallowances
+php artisan make:migration name_of_migration --table=processshiftallowances
 
 // add field in schema
 
 php artisan migrate
+
+// get first 10 records. required when there is to much data
+
+ $test = EmployeeSalaryTemp::get();
+        dd($test->take(10));
+		
+// excel https://docs.laravel-excel.com/3.1/imports/
