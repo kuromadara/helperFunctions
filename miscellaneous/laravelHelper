@@ -10,3 +10,5 @@ php artisan migrate
         dd($test->take(10));
 		
 // excel https://docs.laravel-excel.com/3.1/imports/
+
+// Forms https://laravel.com/docs/4.2/html
