@@ -8,7 +8,15 @@ php artisan migrate
 
  $test = EmployeeSalaryTemp::get();
         dd($test->take(10));
-		
+
 // excel https://docs.laravel-excel.com/3.1/imports/
 
 // Forms https://laravel.com/docs/4.2/html
+
+php artisan tinker
+
+bcrypt('password');
+
+// openssl_encrypt() error fix
+
+Fixed it by copying libeay32.dll and ssleay32.dll from PHP-root folder to Apache/bin folder and restarted Apache.
