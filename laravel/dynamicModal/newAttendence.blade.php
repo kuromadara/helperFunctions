@@ -14,7 +14,7 @@
                                 <th style="min-width: 200px">Name</th>
                                 <th>Cw. No</th>
                                 <th style="min-width: 162px">Work</th>
-                                <th style="min-width: 70px">Attendance</th>
+                                <th style="min-width: 70px" colspan="2">Process</th>
 
                             </tr>
                         </thead>
@@ -27,7 +27,7 @@
                                 <td class="left">   {{ $worker->casualWorker->name}}   </td>
                                 <td class="left">   {{ $worker->casual_worker_no}}  </td>
                                 <td class="left">   {{ $worker->casualWorkerRequision[0]->name_of_work ?? "NA"}}   </td>
-                                <td class="left">
+                                <td class="left" colspan="2">
                                     {{-- <textarea name="attJson[]" cols="30" rows="10" style="display: none;"></textarea> --}}
                                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#workerAttModal{{$worker->id}}">
                                         Attendence
@@ -49,15 +49,14 @@
                                                                 @foreach($dates as $date)
                                                                     <th style="min-width:98px">{{date("d",strtotime($date))}}</th>
                                                                 @endforeach
-
                                                             </tr>
                                                         </thead>
                                                         <tbody>
                                                             <tr>
                                                                 @foreach($dates as $date)
                                                                     <td class="left" style="word-wrap:break-word;">
-                                                                        FN<input type="checkbox" name="wid_fns[{{$worker->casualWorker->id}}][]" value="{{$date}}"}}>
-                                                                        AN<input type="checkbox" name="wid_ans[{{$worker->casualWorker->id}}][]" value="{{$date}}"}}>
+                                                                        <input type="checkbox" name="wid_fns[{{$worker->casualWorker->id}}][]" value="{{$date}}"}}>FN
+                                                                        <input type="checkbox" name="wid_ans[{{$worker->casualWorker->id}}][]" value="{{$date}}"}}>AN
                                                                     </td>
                                                                 @endforeach
                                                             </tr>
@@ -79,7 +78,7 @@
 
                                 </td>
                                 <td colspan="4">
-                                    <div class="row" style="align-items:start !important;">
+                                    <div class="row">
 
                                         <h1 id="attnden"></h1>
                                         <div class="col-md-4">
@@ -107,6 +106,14 @@
                                                ]) !!}
                                            </div>
                                        </div>
+                                       <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="name">Net Amount</label>
+                                            {!! Form::number("net_amount", null, [
+                                            "class" => "form-control text-right", "placeholder" => "Net Amount", "style" => "width:auto", "id" => "net_amount"
+                                            ]) !!}
+                                        </div>
+                                    </div>
                                    </div>
                                 <td>
 
@@ -121,84 +128,19 @@
     </div>
 </div>
 
-<div id="attnModal" class="modal">
-
-    <div class="modal-content">
-        <div class="modal-header">
-            <h6 class="modal-title">List of Dates</h6>
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-          </div>
-
-            <button type="button" class="save" id="btnSave">Save</button>
-    </div>
-</div>
-
 @endsection
 @section('css')
 
 <style>
-    @media (max-width: 767px) {
-    .modal-fullscreen-xs-down {
-        padding: 0 !important;
-    }
-    .modal-fullscreen-xs-down .modal-dialog {
-        width: 100%;
-        height: 100%;
-        margin: 0;
-        padding: 0;
-    }
-    .modal-fullscreen-xs-down .modal-content {
-        height: auto;
-        min-height: 100%;
-        border: 0 none;
-        border-radius: 0;
-        box-shadow: none;
-    }
-    }
-    @media (max-width: 991px) {
-    .modal-fullscreen-sm-down {
-        padding: 0 !important;
-    }
-    .modal-fullscreen-sm-down .modal-dialog {
-        width: 100%;
-        height: 100%;
-        margin: 0;
-        padding: 0;
-    }
-    .modal-fullscreen-sm-down .modal-content {
-        height: auto;
-        min-height: 100%;
-        border: 0 none;
-        border-radius: 0;
-        box-shadow: none;
-    }
-    }
-    @media (max-width: 1199px) {
-    .modal-fullscreen-md-down {
-        padding: 0 !important;
-    }
-    .modal-fullscreen-md-down .modal-dialog {
-        width: 100%;
-        height: 100%;
-        margin: 0;
-        padding: 0;
-    }
-    .modal-fullscreen-md-down .modal-content {
-        height: auto;
-        min-height: 100%;
-        border: 0 none;
-        border-radius: 0;
-        box-shadow: none;
-    }
-    }
+
     .modal-fullscreen {
-    padding: 0 !important;
+    padding: auto !important;
     }
     .modal-fullscreen .modal-dialog {
     width: 100%;
-    height: 100%;
-    margin: 0;
-    padding: 0;
+    height: 50%;
+    margin-top: 100px;
+    padding: auto;
     }
     .modal-fullscreen .modal-content {
     height: auto;
@@ -207,19 +149,6 @@
     border-radius: 0;
     box-shadow: none;
     }
-
-    /* html {
-    display: flex;
-    height: 100%;
-    }
-
-    body {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    } */
 
     .btn-open-modal {
     margin-bottom: 0.5em;
@@ -233,11 +162,8 @@
 
     saveAttData = function(obj){
         var $this = $(obj);
-
+        var $modal = $this.parents(".modal");
         var logicTr = $this.parents("tr").next("tr");
-        /*
-        * next TR because the calculation is done in next row of the button. reffer to image.
-        */
         var arrayData = $modal.find("input:checked").serializeArray();
         console.log(arrayData.length);
 
@@ -248,6 +174,8 @@
 
         logicTr.find("#total_days").val(days);
         logicTr.find("#gross_amount").val(gross_amount);
+
+        //$modal.parents("td").find("textarea").val(JSON.stringify(arrayData));
 
         $modal.modal("hide");
 
