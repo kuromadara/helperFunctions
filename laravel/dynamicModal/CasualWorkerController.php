@@ -1,62 +1,65 @@
-public function attendancePost(Request $request,CasualWorkerAttendanceTran $attendance_trans)
-    {
-       dd($request->all());
+public function newAttendancePost(Request $request, $requision_id)
+ {
+     DB::beginTransaction();
+     try {
+             foreach($request->data as $workerId => $datalist) {
+                 // dd($datalist['total_amount']);
+                 $data = [
+                     'casual_worker_id' => $workerId,
+                     'casual_worker_no' => $datalist['casual_worker_no'],
+                     'department_id'    => $request->department_id,
+                     'from_date'        => $request->from_date,
+                     'to_date'          => $request->to_date,
+                     'total_days'       => $datalist['total_days'],
+                     'rate'             => $datalist['rate'],
+                     'gross_amount'     => $datalist['gross_amount'],
+                     'net_amount'       => $datalist['net_amount'],
+                     'ot_hour'         => $datalist['ot_hour'],
+                     'ot_rate'          => $datalist['ot_rate'],
+                     'ot_total'        => $datalist['ot_amount'],
+                     'total_amount'     => $datalist['total_amount'],
+                     'acknowledgement'  => $datalist['ack'],
 
-        DB::beginTransaction();
-        try {
-            $dates = displayDates($request->from_date, $request->to_date);
-            //dd($request->worker_name);
-            foreach($request->worker_name as $k =>$cw){
+                 ];
+                 CasualWorkerAttendance::create($data);
 
-            $data=[
-                "from_date"=>$request->from_date,
-                "to_date"=>$request->to_date,
-                "department_id"=>$request->department,
-                "casual_worker_id"=>$cw,
-            ];
+                 foreach($datalist['wid_fns'] as $key => $date) {
 
-            $attendance=CasualWorkerAttendance::create($data);
-
-            foreach ($dates as $key => $date) {
-            $date=dateFormat($date,'Y-m-d');
-
-            $insert_data=[
-                "date"=>$date,
-                "casual_worker_id"=>$request->worker_name,
-                "casual_worker_attendance_id"=> $attendance->id,
-            ];
-            $attendance_trans=CasualWorkerAttendanceTran::create($insert_data);
-            $date=dateFormat($date,'d-M-y');
-
-            if($request->fn!=null){
-             foreach($request->fn as $index =>$f){
-                //dd($index,$date);
-              if($index==$date){
-
-                $fn_val=1;
-                $attendance_trans->update(['fn' => $fn_val]);
-              }
-
-             }
-            }
-            if($request->an!=null){
-
-             foreach($request->an as $ind =>$a){
-                    if($ind==$date){
-                    $an_val=1;
-                    $attendance_trans->update(['an' => $an_val]);
-                    }
+                     $data_fns = [
+                         'casual_worker_id' => $workerId,
+                         'date' => $date,
+                         'fn'   => 1,
+                         'an'   => 0,
+                         'casual_worker_requision_id' => $requision_id,
+                     ];
+                     CasualWorkerAttendanceTran::create($data_fns);
+                     //dump($data_fns);
                  }
-              }
-           }
-        }
-        } catch (Exception $e) {
-            DB::rollback();
-            Log::critical($e);
-            $request->session()->flash('error', 'Something went wrong');
-            return back();
-        }
-        DB::commit();
-        $request->session()->flash('success', 'Successfully submitted');
-        return back();
-    }
+
+                 foreach($datalist['wid_ans'] as $key => $date) {
+
+                     $data_ans = [
+                         'casual_worker_id' => $workerId,
+                         'date' => $date,
+                         'fn'   => 0,
+                         'an'   => 1,
+                         'casual_worker_requision_id' => $requision_id,
+                     ];
+                     CasualWorkerAttendanceTran::create($data_ans);
+                     //dump($data_ans);
+                 }
+             }
+
+         } catch (Exception $e) {
+             DB::rollback();
+             Log::critical($e);
+             dd($e);
+             $request->session()->flash('error', 'Something went wrong');
+             return back();
+         }
+         DB::commit();
+         $request->session()->flash('success', 'Successfully submitted');
+         return back();
+     // dd($request->all());
+     // return  "test";
+ }
