@@ -13,7 +13,7 @@
 @forelse ($claims as $key => $item)
     <tr data-id="{{$item->id}}">
         <td>
-            <input type="checkbox" class="checkbox" name="salhead[]" value="{{$item->id}}" onclick="chkBox(this.checked, 'amount_{{$item->id}}', 'remarks_{{$item->id}}')"/>    
+            <input type="checkbox" class="checkbox" name="salhead[]" value="{{$item->id}}" onclick="chkBox(this.checked, 'amount_{{$item->id}}', 'remarks_{{$item->id}}')"/>
         </td>
         <td>{{ $item->name }}</td>
         <td>{{ $item->code }}</td>
@@ -29,3 +29,42 @@
         <td class="text-danger text-center" colspan="5">Claims head not found.</td>
     </tr>
 @endforelse
+
+/**
+ * Alternate Process
+ */
+
+function chkBox(obj) {
+    $(obj).parents("tr").find("input[type='number']").prop('disabled', !$(obj).is(":checked"));
+}
+
+
+<tbody>
+   @forelse ($policies as $key => $policy)
+   <tr>
+       <td>
+           @if($policy->licprocessdata)
+               @if($salarystatus->isLicProcessed())
+                   <strong class="text-danger">Processed</strong>
+               @else
+                   <strong class="text-info">Added for processing</strong>
+               @endif
+           @else
+               <input name="datas[{{$key}}][policy_id]" type="checkbox" value="{{$policy->id}}" onclick="chkBox(this)" id="checkbox-{{$policy->id}}"/>
+           @endif
+       </td>
+       <td>{{ $key+1 }}</td>
+       <td>{{ $policy->employees->full_name}}</td>
+       <td>{{$policy->employee_code}}</td>
+       <td class="text-right"><input class="form-control text-right" type="number" name="datas[{{$key}}][monthly_premium]" value={{$policy->monthly_premium }} disabled="disabled"></td>
+       <td>{{ $policy->start_date}}</td>
+       <td>{{$policy->closing_date }}</td>
+       <td>{{$policy->closing_month}}/{{$policy->closing_year}}</td>
+
+   </tr>
+   @empty
+       <tr>
+           <td colspan="7" class="text-center text-danger">No Data Found</td>
+       </tr>
+   @endempty
+</tbody>
