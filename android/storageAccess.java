@@ -7,9 +7,9 @@
                 startActivity(getpermission);
             }
         }
-	
+
 Declare the MANAGE_EXTERNAL_STORAGE permission in the manifest.
-	
+
 https://stackoverflow.com/questions/66839849/android-studio-getting-error-ioexception-operation-not-permitted-while-creating
 
 //use legacy to get access in android 10
@@ -22,7 +22,9 @@ android:preserveLegacyExternalStorage='true'
 
 //the above cannot be uploaded to play store so
 
-IMAGE_DIRECTORY = "/Documents"; 
+IMAGE_DIRECTORY = "/Documents";
+
+File uploadDirectory = new File(Environment.getExternalStorageDirectory() + IMAGE_DIRECTORY + File.separator + "pwdvoterreg" + File.separator + "upload");
 
 //use public directory such as these
 
