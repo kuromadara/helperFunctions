@@ -1,0 +1,16 @@
+<<h3>Press CTRL + V </h3>
+<br>
+
+<input type="button" name="pasteButton" value="press me" id="pasteButton"/>
+
+<script type="text/javascript">
+  $(window).keydown(function(event) {
+    if(event.ctrlKey && (event.which == 86 || event.which==118)) {
+        $('#pasteButton').trigger("click")
+      event.preventDefault();
+    }
+  });
+    $('#pasteButton').click( function(){
+        alert("hello");
+  });
+</script>
