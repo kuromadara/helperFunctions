@@ -20,3 +20,8 @@ bcrypt('password');
 // openssl_encrypt() error fix
 
 Fixed it by copying libeay32.dll and ssleay32.dll from PHP-root folder to Apache/bin folder and restarted Apache.
+
+
+// make model with migration
+
+php artisan make:model Models\modelname --migration
