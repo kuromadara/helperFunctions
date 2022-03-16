@@ -1,0 +1,48 @@
+Schema::create('file_masters', function (Blueprint $table) {
+    $table->id();
+    $table->string('file_no');
+    $table->string('reference_no');
+    $table->string('file_sub');
+    $table->integer('file_type');
+    $table->date('file_date');
+    $table->text('details');
+    $table->unsignedBigInteger('created_by_id');
+    $table->string('created_by_name');
+    $table->string('created_by_designation');
+    $table->string('created_by_department');
+    $table->unsignedBigInteger('from_emp_id');
+    $table->unsignedBigInteger('to_emp_id');
+    $table->string('trans_type');
+    $table->text('last_remarks');
+    $table->integer('trans_stage');
+    $table->integer('status');
+    $table->timestamps();
+});
+
+Schema::create('file_trans', function (Blueprint $table) {
+    $table->id();
+    $table->unsignedBigInteger('file_id');
+    $table->unsignedBigInteger('from_emp_id');
+    $table->unsignedBigInteger('to_emp_id');
+    $table->string('trans_type');
+    $table->integer('trans_status');
+    $table->date('sent_date')->nullable();
+    $table->date('actual_sent_date')->nullable();
+    $table->date('rcv_date')->nullable();
+    $table->date('actual_rcv_date')->nullable();
+    $table->date('trans_date')->nullable();
+    $table->text('from_user_details');
+    $table->text('to_user_details');
+    $table->text('remarks')->comment('Name + Designation + Department');
+    $table->timestamps();
+});
+
+Schema::create('file_types', function (Blueprint $table) {
+    $table->id();
+    $table->string('name');
+});
+
+Schema::create('file_trans_types', function (Blueprint $table) {
+    $table->id();
+    $table->string('name');
+});
