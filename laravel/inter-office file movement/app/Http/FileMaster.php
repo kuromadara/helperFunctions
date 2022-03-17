@@ -24,6 +24,10 @@ class FileMaster extends Model
     {
         return $this->belongsTo(FileType::class, 'file_type');
     }
+    public function from_employee()
+    {
+        return $this->belongsTo(Employee::class, 'from_emp_id');
+    }
     public function to_employee()
     {
         return $this->belongsTo(Employee::class, 'to_emp_id');

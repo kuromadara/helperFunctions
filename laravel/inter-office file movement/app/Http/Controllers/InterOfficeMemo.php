@@ -99,7 +99,7 @@ class InterOfficeMemo extends Controller
                 'from_emp_id'       => $request->employee_id_from,
                 'trans_type'        => FileTransType::$INITIATED,
                 'sent_date'         => date('Y-m-d'),
-                'from_user_details' => $request->employee_id_from . ' - ' . $file_master->created_by_name . ' ,' . $file_master->created_by_designation . ' ,' . $file_master->created_by_department,
+                'from_user_details' => $file_master->from_employee->code . ' - ' . $file_master->created_by_name . ' ,' . $file_master->created_by_designation . ' ,' . $file_master->created_by_department,
                 'remarks'           => $request->remarks,
             ];
 
@@ -112,7 +112,7 @@ class InterOfficeMemo extends Controller
                 'trans_type'    => FileTransType::$FORWARDED,
                 'trans_status'      => FileTransType::$ACTIVE_NOW,
                 'sent_date'         => date('Y-m-d'),
-                'from_user_details' => $request->employee_id_from . ' ' . $file_master->created_by_name . ' ,' . $file_master->created_by_designation . ' ,' . $file_master->created_by_department,
+                'from_user_details' => $file_master->from_employee->code . ' - ' . $file_master->created_by_name . ' ,' . $file_master->created_by_designation . ' ,' . $file_master->created_by_department,
                 'to_user_details'   => $to_employee->full_name_with_code . ' ,' . $to_designation->name . ' ,' . $to_department->name,
                 'remarks'           => $request->remarks,
             ];
@@ -245,6 +245,17 @@ class InterOfficeMemo extends Controller
                     'status' => FileMaster::$CLOSED
                 ]);
 
+            $data_trans_closed = [
+                'file_id' => $file_master->id,
+                'from_emp_id'       => $file_master->from_employee->id,
+                'trans_type'        => FileTransType::$CLOSED,
+                'actual_rcv_date'   => date('Y-m-d'),
+                'trans_date'        => date('Y-m-d'),
+                'from_user_details' => $file_master->to_employee->code . ' - ' . $file_master->created_by_name . ' ,' . $file_master->created_by_designation . ' ,' . $file_master->created_by_department,
+            ];
+
+            FileTrans::create($data_trans_closed);
+
         } catch (Exception $e) {
             DB::rollback();
             Log::critical($e);
@@ -325,7 +336,7 @@ class InterOfficeMemo extends Controller
                 // 'actual_sent_date'  => date('Y-m-d'),
                 'rcv_date'          => date('Y-m-d'),
                 'trans_date'        => date('Y-m-d'),
-                'from_user_details' => $request->employee_id_from . ' - ' . $from_employee->full_name . ' ,' . $from_designation->name . ' ,' . $from_department->name,
+                'from_user_details' => $from_employee->code . ' - ' . $from_employee->full_name . ' ,' . $from_designation->name . ' ,' . $from_department->name,
                 'to_user_details'   => $to_employee->full_name_with_code . ' ,' . $to_designation->name . ' ,' . $to_department->name,
                 'remarks'           => $request->remarks,
             ];
@@ -343,5 +354,19 @@ class InterOfficeMemo extends Controller
         DB::commit();
         $request->session()->flash('success', 'Successfully Forwarded');
         return back();
+    }
+
+    public function list(Request $request, $id)
+    {
+
+        $transactions = FileTrans::query()
+            ->where('file_id', $id)
+            ->get();
+
+        $initiation_date = FileMaster::select('created_at')
+            ->where('id', $id)
+            ->first();
+
+        return view('imo.list', compact('transactions', 'initiation_date'));
     }
 }
