@@ -56,5 +56,10 @@ Route::group(['prefix' => 'imo'], function () {
         'uses' => 'InterOfficeMemo@list',
     ])
         ->middleware('role_or_permission:User');
+    Route::get('master-list', [
+         'as'   => 'imo.master-list',
+         'uses' => 'InterOfficeMemo@masterList',
+     ])
+         ->middleware('role_or_permission:User');
 
 });
