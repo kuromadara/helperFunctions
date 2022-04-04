@@ -19,16 +19,21 @@ class SalaryUploadImport implements ToCollection, WithHeadingRow
     /**
     * @param Collection $collection
     */
+
+    private $row = 0;
+
     public function  __construct($salhead)
     {
         $this->salhead = $salhead;
     }
-    
+
     public function collection(Collection $collection)
-    {   
-        // dd($collection->groupBy("employee_code"));
-        
+    {
+          // dd($collection->groupBy("employee_code"));
+
         $collection->groupBy("employee_code")->each(function($row, $employee_code){
+
+          ++this->$row;
 
             //dd($employee_code, $row, $row->sum("amount"));
             // $employee_code = $row['employee_code'];
@@ -42,9 +47,9 @@ class SalaryUploadImport implements ToCollection, WithHeadingRow
                 $deducts = $row->sum("amount");
                 $claims = 0.00;
             }
-            
+
             // dump($employee_code, $row);
-            
+
             $employee_master = Employee::select("id")->where('code', $employee_code)->first();
             // dd($employee_master);
             if(!$employee_master){
@@ -58,9 +63,9 @@ class SalaryUploadImport implements ToCollection, WithHeadingRow
                 ->where('employee_code', $employee_code)
                 ->where("sal_head_id", $this->salhead->id)
                 ->first();
- 
+
             if($temp_sal_row) {
-                $temp_sal_row->update([    
+                $temp_sal_row->update([
                     "claims" => $claims,
                     "deducts" => $deducts,
                 ]);
@@ -80,11 +85,16 @@ class SalaryUploadImport implements ToCollection, WithHeadingRow
                     'status' => '1',
                     'head_type' => $this->salhead->type,
                 ];
-    
+
                 EmployeeSalaryTemp::Create($data);
-            }        
-            
+            }
+
         });
-       
+
+    }
+
+    public function getRowCount(): int
+    {
+      return $this->row;
     }
 }

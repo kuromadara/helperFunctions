@@ -19,26 +19,29 @@ class UploadController extends Controller
     }
 
     public function store(Request $request)
-    {   
-        
+    {
+
         $request->validate([
             'salhead' => 'required|exists:sal_heads,id',
             'file' => 'required|mimes:xlsx,xls',
         ]);
 
         $sal_head = SalHead::find($request->salhead);
+
+        new SalaryUploadImport($sal_head)
+
         DB::beginTransaction();
         try{
-            Excel::import(new SalaryUploadImport($sal_head), $request->file );
+            Excel::import($import, $request->file );
         }
         catch(\Exception $e){
             report($e);
             DB::rollback();
             dd($e->getMessage());
-            return Redirect::back()->with("error", "Something went wrong");
+            return Redirect::back()->with("error", "Error at row ". ($import->getRowCount() + 2) .". Please check the file and try again.");
         }
         DB::commit();
         return redirect()->back()->with("success", " successfully uploaded");
-        
+
     }
 }
