@@ -25,3 +25,15 @@ Fixed it by copying libeay32.dll and ssleay32.dll from PHP-root folder to Apache
 // make model with migration
 
 php artisan make:model Models\modelname --migration
+
+// get last two digit of a string
+
+substr($string, 2)
+
+example
+
+year - 2022, month - 3
+
+'yy_mm' => substr($salaryearblock->salary_year, 2) . 0 .$salaryearblock->salary_month,
+
+yy_mm -> 2203
