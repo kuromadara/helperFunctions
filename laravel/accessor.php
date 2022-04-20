@@ -23,3 +23,8 @@ protected $casts = [
 // view
 
 <td  class="text-right">{{$medi->adv_balance}}</td>
+
+
+link:
+
+https://stackoverflow.com/questions/42231779/using-casts-with-accessor-in-laravel-5-3
