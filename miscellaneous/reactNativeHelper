@@ -1,0 +1,3 @@
+add specific version ok jdk in gradle.properties file
+
+org.gradle.java.home= C:\\Users\\laora\\Documents\\GitProjects\\TODO app\\jdk-11.0.2

@@ -5,3 +5,7 @@ mysql -u username -p databasename < filepath/filename.sql
 #load from databasename
 
 mysqldump -u username -p database_name > data-dump.sql
+
+kill sql process
+
+https://stackoverflow.com/questions/44192418/how-to-find-mysql-process-list-and-to-kill-those-processes
