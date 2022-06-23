@@ -26,7 +26,7 @@ $get_emp_details=processShiftallowance::query()
 });
 
 // filter
-	
+
 function employee_global_filter(Builder $query)
 {
     //dd(request("grade"));
