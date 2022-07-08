@@ -28,7 +28,7 @@
       ]
  * ERROR:
     The field employee_code: 1018 has a duplicate value at row: 2
-    The field employee_code: 1018 has a duplicate value at row: 4 
+    The field employee_code: 1018 has a duplicate value at row: 4
  */
 
 
@@ -49,3 +49,15 @@ $validator_distinct = Validator::make($distict_check, [
 );
 
 $validator_distinct->validate();
+
+/* Try Catch */
+
+DB::beginTransaction();
+try{
+    Excel::import($import, $request->file);
+
+} catch(\Maatwebsite\Excel\Validators\ValidationException $e){
+    $failures = $e->failures();
+    return Redirect::back()->with("error",  $failures);
+}
+DB::commit();
