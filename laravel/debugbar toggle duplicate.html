@@ -1,0 +1,26 @@
+<!-- Debugbar toggle duplicate javascript -->
+/* Debugbar toggle duplicate */
+<style>
+  div.phpdebugbar-widgets-sqlqueries li.phpdebugbar-widgets-list-item.phpdebugbar-widgets-sql-duplicate {
+      background-color: #FFAC4694 !important;
+  }
+</style>
+<script>
+    window.toggleSqlDuplicate = function () {
+    $('<a>')
+        .text(' | Toggle Duplicates |')
+        .on('click', function () {
+             $('div.phpdebugbar-widgets-sqlqueries li')
+                  .not('.phpdebugbar-widgets-sql-duplicate')
+                  .not('.phpdebugbar-widgets-table-list-item')
+                  .toggle();
+        })
+        .appendTo($('.phpdebugbar-widgets-sqlqueries .phpdebugbar-widgets-status'));
+};
+setTimeout(function(){
+    toggleSqlDuplicate();
+    $('.phpdebugbar-datasets-switcher').change(function(){
+        toggleSqlDuplicate()
+    });
+},1000);
+</script>
