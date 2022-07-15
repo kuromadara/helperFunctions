@@ -19,19 +19,19 @@
        //pop up
        swal({
            title: "Are you sure ??",
-           text: message,
+           text: "You will not be able to recover this data!",
            icon: "warning",
            buttons: true,
            dangerMode: true,
        })
        .then((willDelete) => {
            if (willDelete) {
-           swal("Deleted Succesfully!", {
+           swal("Data deleted Succesfully!", {
                icon: "success",
            });
            window.location.href = href;
            } else {
-           swal("Your file is safe!");
+           swal("Your data is safe!");
            }
        });
    });
