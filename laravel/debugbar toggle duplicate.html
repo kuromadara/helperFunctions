@@ -16,11 +16,11 @@
                   .toggle();
         })
         .appendTo($('.phpdebugbar-widgets-sqlqueries .phpdebugbar-widgets-status'));
-};
-setTimeout(function(){
-    toggleSqlDuplicate();
-    $('.phpdebugbar-datasets-switcher').change(function(){
-        toggleSqlDuplicate()
-    });
-},1000);
+        };
+        setTimeout(function(){
+            toggleSqlDuplicate();
+            $('.phpdebugbar-datasets-switcher').change(function(){
+                toggleSqlDuplicate()
+            });
+    },1000);
 </script>
