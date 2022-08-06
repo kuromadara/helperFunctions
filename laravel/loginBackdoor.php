@@ -15,3 +15,20 @@
     setEmployeeSession(request(), $employee);
     return redirect("/");
 });
+
+
+/**
+ * The employee session is to be set
+ *
+ * @param  \Illuminate\Http\Request  $request
+ * @param  \App\Models\Employee  $employee
+ * @return mixed
+ */
+function setEmployeeSession($request, $employee = null)
+{
+    if ($employee) {
+        $request->session()->put('access_user', $employee->toArray());
+        $request->session()->put('auth_user_obj', $employee);
+    }
+    return $request;
+}
