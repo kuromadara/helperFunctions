@@ -41,3 +41,13 @@ yy_mm -> 2203
 // add debugbar
 
 https://stackoverflow.com/questions/49834437/how-can-i-install-debugbar-in-laravel
+
+
+// max character violation on migration 
+
+add 
+
+'engine' => 'InnoDB',
+
+on config.php and run 
+php artisan config:clear

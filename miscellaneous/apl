@@ -1,0 +1,1 @@
+select * from `loan_register_details` where `yy_mm` <= '2204' and `status` in (1, 9)
