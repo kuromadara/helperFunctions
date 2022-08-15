@@ -1,0 +1,19 @@
+Example:
+
+I created a silly script, adding a line with the string "monkey" to a file test.txt on my desktop:
+
+the script:
+
+#!/bin/bash
+
+while true
+ do
+    echo monkey>>/home/jacob/Desktop/test.txt
+    sleep 5
+ done
+
+The line in my /etc/rc.local file:
+
+sh /home/jacob/Desktop/while.sh &
+
+That's all.

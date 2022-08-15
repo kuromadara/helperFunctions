@@ -9,3 +9,8 @@ mysqldump -u username -p database_name > data-dump.sql
 kill sql process
 
 https://stackoverflow.com/questions/44192418/how-to-find-mysql-process-list-and-to-kill-those-processes
+
+
+## join example
+
+SELECT employees.code, `first_name`,`middle_name`,`last_name`, departments.name FROM `employees` JOIN `departments` ON employees.department_id = departments.id WHERE `datetime_of_joining` > '2016-12-31 14:15:29' 

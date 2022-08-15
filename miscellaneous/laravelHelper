@@ -42,6 +42,11 @@ yy_mm -> 2203
 
 https://stackoverflow.com/questions/49834437/how-can-i-install-debugbar-in-laravel
 
+/**
+ * order by a varchar
+ * https://stackoverflow.com/questions/63354896/laravel-order-by-as-number-int-even-if-column-type-is-string
+ **/
+
 
 // max character violation on migration 
 

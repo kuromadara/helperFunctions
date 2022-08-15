@@ -1,0 +1,38 @@
+<a href="{{route("tax-deduction.delete",$other_deduct->id)}}"
+    class="btn btn-danger btn-sm data-confirm">
+    <i class="fa fa-trash"></i>
+</a>
+
+<!-- delete confirmation-->
+
+<script>
+   $(document).ready(function(){
+
+   $('.data-confirm').on('click', function(e){
+       console.log('ready');
+       e.preventDefault(); //cancel default action
+
+       //Recuperate href value
+       var href = $(this).attr('href');
+      
+       //pop up
+       swal({
+           title: "Are you sure ??",
+           text: "You will not be able to recover this data!",
+           icon: "warning",
+           buttons: true,
+           dangerMode: true,
+       })
+       .then((willDelete) => {
+           if (willDelete) {
+           swal("Data deleted Succesfully!", {
+               icon: "success",
+           });
+           window.location.href = href;
+           } else {
+           swal("Your data is safe!");
+           }
+       });
+   });
+   });
+</script>
