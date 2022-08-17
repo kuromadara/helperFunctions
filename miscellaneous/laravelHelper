@@ -46,3 +46,13 @@ https://stackoverflow.com/questions/49834437/how-can-i-install-debugbar-in-larav
  * order by a varchar
  * https://stackoverflow.com/questions/63354896/laravel-order-by-as-number-int-even-if-column-type-is-string
  **/
+
+
+// max character violation on migration 
+
+add 
+
+'engine' => 'InnoDB',
+
+on config.php and run 
+php artisan config:clear
