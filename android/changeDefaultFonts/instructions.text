@@ -20,6 +20,8 @@
         FontsOverride.setDefaultFont(this, "DEFAULT", "fonts/montserrat_regular.ttf");
     }
 
-there is a bug for android >=26
+there is a bug in the above method (rendering issue)
+
+for android >=26
 
 https://waynestalk.com/en/android-app-set-default-font-family-en/
