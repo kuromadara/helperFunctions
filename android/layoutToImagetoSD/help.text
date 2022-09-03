@@ -1,0 +1,37 @@
+layout to image_name
+
+link : https://androidnoon.com/how-to-convert-a-linearlayout-to-image-in-android-studio/
+
+
+save image to sd root
+
+private void saveImage(Bitmap finalBitmap, String image_name) {
+
+  String root = Environment.getExternalStorageDirectory().toString();
+  File myDir = new File(root);
+  myDir.mkdirs();
+  String fname = "Image-" + image_name+ ".jpg";
+  File file = new File(myDir, fname);
+  if (file.exists()) file.delete();
+  Log.i("LOAD", root + fname);
+  try {
+      FileOutputStream out = new FileOutputStream(file);
+      finalBitmap.compress(Bitmap.CompressFormat.JPEG, 90, out);
+      out.flush();
+      out.close();
+  } catch (Exception e) {
+      e.printStackTrace();
+  }
+}
+
+link : https://stackoverflow.com/questions/36624756/how-to-save-bitmap-to-android-gallery
+
+Storage permission
+
+<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+<application android:requestLegacyExternalStorage="true" ... >
+
+
+link : https://stackoverflow.com/questions/8854359/exception-open-failed-eacces-permission-denied-on-android?page=1&tab=scoredesc#tab-top
