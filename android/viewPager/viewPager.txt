@@ -1,0 +1,3 @@
+https://www.geeksforgeeks.org/image-slider-in-android-using-viewpager/
+
+https://www.codenari.com/android/load-image-from-a-url-into-a-viewpager/

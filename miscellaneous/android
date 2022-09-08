@@ -1,3 +1,14 @@
 https://github.com/newbit1/rootAVD
 
 https://github.com/Genymobile/gnirehtet
+
+// Google login
+
+https://www.geeksforgeeks.org/google-signing-using-firebase-authentication-in-android-using-java/
+
+
+// strike through a text programmatically
+
+mOldSingleFare = (TextView) itemView.findViewById(R.id.tvOldSingleFare);
+
+mOldSingleFare.setPaintFlags(mOldSingleFare.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
