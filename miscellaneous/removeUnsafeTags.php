@@ -18,10 +18,10 @@ function strip_unsafe($string, $img=false)
     '/<\/body>/is',
     '/<head(.*?)>/is',
     '/<\/head>/is',
-    '/onload="(.*?)"/is',
-    '/onunload="(.*?)"/is',
     '/<html(.*?)>/is',
-    '/<\/html>/is');
+    '/<\/html>/is'
+    '/on*[a-z]+=".*?"/is',
+    );
 
     // Remove graphic too if the user wants
     if ($img==true)
