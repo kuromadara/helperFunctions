@@ -34,3 +34,8 @@ function strip_unsafe($string, $img=false)
 
     return $string;
 }
+
+/**
+ * An issue might rise for events check link below
+ * link: https://programmierfrage.com/items/php-remove-all-html-event-attributes-in-an-html-tag
+ */
