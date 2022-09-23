@@ -1,3 +1,11 @@
+html_entity_decode($str);
+
+do the above before passing it to the strip_unsafe function
+
+$str = '&lt;a href=&quot;https://www.w3schools.com&quot;&gt;w3schools.com&lt;/a&gt;';
+echo html_entity_decode($str);
+
+
 function strip_unsafe($string, $img=false)
 {
     // Unsafe HTML tags that members may abuse
