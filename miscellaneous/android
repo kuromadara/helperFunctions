@@ -1,3 +1,45 @@
 https://github.com/newbit1/rootAVD
 
 https://github.com/Genymobile/gnirehtet
+
+// Google login
+
+https://www.geeksforgeeks.org/google-signing-using-firebase-authentication-in-android-using-java/
+
+
+// strike through a text programmatically
+
+mOldSingleFare = (TextView) itemView.findViewById(R.id.tvOldSingleFare);
+
+mOldSingleFare.setPaintFlags(mOldSingleFare.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+
+
+// Email pattern Validation
+
+https://stackoverflow.com/questions/12947620/email-address-validation-in-android-on-edittext
+
+// Send data from one activity to another
+
+https://stackoverflow.com/questions/4186021/how-to-start-new-activity-on-button-click
+
+// in-app update android
+
+https://stackoverflow.com/questions/5555098/prompt-android-app-user-to-update-app-if-current-version-market-version/56808529#56808529
+
+// comparing two string using == sometimes doesnot worker
+// reason: https://www.geeksforgeeks.org/difference-between-and-equals-method-in-java/
+
+String abc = "success";
+String xyz = "success";
+
+boolean  isSame = abc.equals(xyz);
+
+if(isSame){
+
+  //code block here
+
+} else {
+
+  //code block here
+
+}

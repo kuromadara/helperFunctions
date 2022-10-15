@@ -1,0 +1,94 @@
+layout to image_name
+
+link : https://androidnoon.com/how-to-convert-a-linearlayout-to-image-in-android-studio/
+
+
+save image to sd root
+
+private void saveImage(Bitmap finalBitmap, String image_name) {
+
+  String root = Environment.getExternalStorageDirectory().toString();
+  File myDir = new File(root);
+  myDir.mkdirs();
+  String fname = "Image-" + image_name+ ".jpg";
+  File file = new File(myDir, fname);
+  if (file.exists()) file.delete();
+  Log.i("LOAD", root + fname);
+  try {
+      FileOutputStream out = new FileOutputStream(file);
+      finalBitmap.compress(Bitmap.CompressFormat.JPEG, 90, out);
+      out.flush();
+      out.close();
+  } catch (Exception e) {
+      e.printStackTrace();
+  }
+}
+
+link : https://stackoverflow.com/questions/36624756/how-to-save-bitmap-to-android-gallery
+
+Storage permission
+
+<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+<application android:requestLegacyExternalStorage="true" ... >
+
+
+link : https://stackoverflow.com/questions/8854359/exception-open-failed-eacces-permission-denied-on-android?page=1&tab=scoredesc#tab-top
+
+Request permission on start up:
+
+@Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        navigator=new Navigator();
+        checkPermissions();
+    }
+
+    /**
+     * Checks the dynamically-controlled permissions and requests missing permissions from end user.
+     */
+    protected void checkPermissions() {
+        final List<String> missingPermissions = new ArrayList<String>();
+        // check all required dynamic permissions
+        for (final String permission : REQUIRED_SDK_PERMISSIONS) {
+            final int result = ContextCompat.checkSelfPermission(this, permission);
+            if (result != PackageManager.PERMISSION_GRANTED) {
+                missingPermissions.add(permission);
+            }
+        }
+        if (!missingPermissions.isEmpty()) {
+            // request all missing permissions
+            final String[] permissions = missingPermissions
+                    .toArray(new String[missingPermissions.size()]);
+            ActivityCompat.requestPermissions(this, permissions, REQUEST_CODE_ASK_PERMISSIONS);
+        } else {
+            final int[] grantResults = new int[REQUIRED_SDK_PERMISSIONS.length];
+            Arrays.fill(grantResults, PackageManager.PERMISSION_GRANTED);
+            onRequestPermissionsResult(REQUEST_CODE_ASK_PERMISSIONS, REQUIRED_SDK_PERMISSIONS,
+                    grantResults);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String permissions[],
+                                           @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case REQUEST_CODE_ASK_PERMISSIONS:
+                for (int index = permissions.length - 1; index >= 0; --index) {
+                    if (grantResults[index] != PackageManager.PERMISSION_GRANTED) {
+                        // exit the app if one permission is not granted
+                        Toast.makeText(this, "Required permission '" + permissions[index]
+                                + "' not granted, exiting", Toast.LENGTH_LONG).show();
+//                        finish();
+                        return;
+                    }
+                }
+                // all permissions were granted
+//                initialize();
+                break;
+        }
+    }
+
+
+https://developer.here.com/documentation/android-premium/dev_guide/topics/request-android-permissions.html

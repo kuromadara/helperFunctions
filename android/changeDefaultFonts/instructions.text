@@ -1,0 +1,27 @@
+
+
+1: Added new font to asset folder.
+2: Added my custom font in the application base theme in STYLES.XML
+
+    <style name="MyMaterialTheme.Base" parent="Theme.AppCompat.Light">
+        <item name="android:fontFamily">montserrat_regular</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+3: Create a class to override the font
+4: You then need to overload the default font, in the main/base activity class.
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setBG((ViewGroup) findViewById(android.R.id.content));
+        FontsOverride.setDefaultFont(this, "DEFAULT", "fonts/montserrat_regular.ttf");
+    }
+
+there is a bug in the above method (rendering issue)
+
+for android >=26
+
+https://waynestalk.com/en/android-app-set-default-font-family-en/

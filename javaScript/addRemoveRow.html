@@ -1,0 +1,188 @@
+<?php
+    $academics = array(
+        "10th" => "10th Standard",
+        "12th" => "12th Standard",
+        "UG" => "Under Graduate",
+        "PG" => "Post Graduate"
+    );
+?>
+<div class="card-header">
+    <div class="row justify-content-between">
+        <div class="col-auto mr-auto">
+            <h3 class="card-title">Academic Records</h3>
+        </div>
+
+    </div>
+</div>
+<div class="card-body">
+    <div class="row">
+        <div class="form-group">
+            <label class="form-label">Academic Records: <span class="form-required">*</span></label>
+            <table class="table table-bordered" id="myTable">
+                <thead>
+                    <tr>
+                        <th>Name of Examination</th>
+                        <th>Stream</th>
+                        <th>Board/Council/University</th>
+                        <th>Year of Passing</th>
+                        <th>Total Marks Obtained out of</th>
+                        <th>Aggregate % of Marks</th>
+                        <th>School/College</th>
+                        <th>Subject(s) Taken</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($academics as $key => $value)
+                    <tr>
+                        <th>
+                            {{$value}}
+                        </th>
+                        <td>
+                            <input type="text" class="form-control" name="data[{{$key}}][stream]">
+                        </td>
+                        <td>
+                            <input type="text" class="form-control" name="data[{{$key}}][board]">
+                        <td>
+                            <input type="number" class="form-control" name="data[{{$key}}][year]">
+                        </td>
+                        <td>
+                            <input type="number" class="form-control" name="data[{{$key}}][total]">
+                        </td>
+                        <td>
+                            <input type="number" class="form-control" name="data[{{$key}}][percentage]">
+                        </td>
+                        <td>
+                            <input type="text" class="form-control" name="data[{{$key}}][school]">
+                        </td>
+                        <td>
+                            <input type="textarea" class="form-control" name="data[{{$key}}][sub]">
+                        </td>
+                    </tr>
+                    @endforeach
+                    <tr>
+                        <th>
+                            Other
+                        </th>
+                        <td>
+                            <input type="text" class="form-control" name="data[oth_0][stream]">
+                        </td>
+                        <td>
+                            <input type="text" class="form-control" name="data[oth_0][board]">
+                        </td>
+                        <td>
+                            <input type="number" class="form-control" name="data[oth_0][year]">
+                        </td>
+                        <td>
+                            <input type="number" class="form-control" name="data[oth_0][total]">
+                        </td>
+                        <td>
+                            <input type="number" class="form-control" name="data[oth_0][percentage]">
+                        </td>
+                        <td>
+                            <input type="text" class="form-control" name="data[oth_0][school]">
+                        </td>
+                        <td>
+                            <input type="textarea" class="form-control" name="data[oth_0][sub]">
+                        </td>
+                        <td>
+                            <input type="button" class="btn btn-primary" value="+" onclick="addField();">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script>
+  function addField (argument) {
+     var myTable = document.getElementById("myTable");
+     var currentIndex = myTable.rows.length;
+     var currentRow = myTable.insertRow(-1);
+
+     var title = document.createElement("p");
+     title.setAttribute("style", "color: #9aa0ac");
+     title.textContent = 'OTHER '+ (currentIndex -5);
+
+     var streamBox = document.createElement("input");
+     streamBox.setAttribute("type", "text");
+     streamBox.setAttribute("class", "form-control");
+     streamBox.setAttribute("name", "data[oth_"+ (currentIndex -5)+"]" +"["+"stream" +"]");
+
+     var boardBox = document.createElement("input");
+     boardBox.setAttribute("type", "text");
+     boardBox.setAttribute("class", "form-control");
+     boardBox.setAttribute("name",  "data[oth_"+ (currentIndex -5)+"]" +"["+"board" +"]");
+
+     var yearBox = document.createElement("input");
+     yearBox.setAttribute("type", "number");
+     yearBox.setAttribute("class", "form-control");
+     yearBox.setAttribute("name", "data[oth_"+ (currentIndex -5)+"]" +"["+"year" +"]");
+
+     var totalBox = document.createElement("input");
+     totalBox.setAttribute("type", "number");
+     totalBox.setAttribute("class", "form-control");
+     totalBox.setAttribute("name", "data[oth_"+ (currentIndex -5)+"]" +"["+"total" +"]");
+
+     var percentageBox = document.createElement("input");
+     percentageBox.setAttribute("type", "number");
+     percentageBox.setAttribute("class", "form-control");
+     percentageBox.setAttribute("name", "data[oth_"+ (currentIndex -5)+"]" +"["+"percentage" +"]");
+
+     var schoolBox = document.createElement("input");
+     schoolBox.setAttribute("type", "text");
+     schoolBox.setAttribute("class", "form-control");
+     schoolBox.setAttribute("name", "data[oth_"+ (currentIndex -5)+"]" +"["+"school" + "]");
+
+     var subBox = document.createElement("input");
+     subBox.setAttribute("type", "textarea");
+     subBox.setAttribute("class", "form-control");
+     subBox.setAttribute("name", "data[oth_"+ (currentIndex -5)+"]" +"["+"sub" + "]");
+
+     var addRowBox = document.createElement("input");
+     addRowBox.setAttribute("type", "button");
+     addRowBox.setAttribute("value", "+");
+     addRowBox.setAttribute("onclick", "addField();");
+     addRowBox.setAttribute("class", "btn btn-primary");
+     var removeButton = document.createElement("input");
+     removeButton.setAttribute("type", "button");
+     removeButton.setAttribute("value", "-");
+     removeButton.setAttribute("onclick", "removeRow(this)");
+     removeButton.setAttribute("class", "btn btn-danger");
+
+
+     var currentCell = currentRow.insertCell(-1);
+     currentCell.appendChild(title);
+
+     currentCell = currentRow.insertCell(-1);
+     currentCell.appendChild(streamBox);
+
+     currentCell = currentRow.insertCell(-1);
+     currentCell.appendChild(boardBox);
+
+     currentCell = currentRow.insertCell(-1);
+     currentCell.appendChild(yearBox);
+
+     currentCell = currentRow.insertCell(-1);
+     currentCell.appendChild(totalBox);
+
+     currentCell = currentRow.insertCell(-1);
+     currentCell.appendChild(percentageBox);
+
+     currentCell = currentRow.insertCell(-1);
+     currentCell.appendChild(schoolBox);
+
+     currentCell = currentRow.insertCell(-1);
+     currentCell.appendChild(subBox);
+
+     currentCell = currentRow.insertCell(-1);
+     currentCell.appendChild(addRowBox);
+     currentCell.appendChild(removeButton);
+
+ }
+ function removeRow(r) {
+     var i = r.parentNode.parentNode.rowIndex;
+     document.getElementById("myTable").deleteRow(i);
+ }
+</script>
