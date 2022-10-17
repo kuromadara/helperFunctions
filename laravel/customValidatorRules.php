@@ -65,8 +65,12 @@ DB::commit();
 
 // another example
 
+
 $data = $collection->toArray();
-// dd($data);
+$message[] = [
+    'row' => $this->row,
+    'message' => 'Imported Successfully',
+];
 foreach ($data as $rowNum => $row) {
     foreach ($row as $field => $value) {
         $actual_row                                   = $rowNum + 1; // 1 for heading row, 1 for 0 index
@@ -83,9 +87,7 @@ foreach ($data as $rowNum => $row) {
 
     }
 }
-
-// dd($message);
-
+        // dd($message);
 $validator = Validator::make($data,[
     '*.name' => 'required|string|min:1',
     '*.mobile' => 'required|numeric|unique:trainees,mobile|digits:10',
