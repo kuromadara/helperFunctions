@@ -103,3 +103,5 @@ $validator = Validator::make($data,[
 ]);
 
 $validator->validate();
+
+// https://beyondco.de/blog/writing-and-testing-custom-validators-in-laravel
