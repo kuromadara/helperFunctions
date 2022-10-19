@@ -68,3 +68,14 @@ function chkBox(obj) {
        </tr>
    @endempty
 </tbody>
+
+// enable disabled
+
+function chkBox(obj) {
+        // find select box and enable
+        var select = obj.parentNode.parentNode.getElementsByTagName("select")[0];
+
+        select.disabled = !obj.checked;
+        console.log(select);
+        // $(obj).parents("tr").find("select,input").prop('disabled', !$(obj).is(":checked"));
+    }
