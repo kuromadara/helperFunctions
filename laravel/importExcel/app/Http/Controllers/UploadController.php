@@ -28,7 +28,7 @@ class UploadController extends Controller
 
         $sal_head = SalHead::find($request->salhead);
 
-        new SalaryUploadImport($sal_head)
+        $import = new SalaryUploadImport($sal_head)
 
         DB::beginTransaction();
         try{

@@ -61,3 +61,47 @@ try{
     return Redirect::back()->with("error",  $failures);
 }
 DB::commit();
+
+
+// another example
+
+
+$data = $collection->toArray();
+$message[] = [
+    'row' => $this->row,
+    'message' => 'Imported Successfully',
+];
+foreach ($data as $rowNum => $row) {
+    foreach ($row as $field => $value) {
+        $actual_row                                   = $rowNum + 1; // 1 for heading row, 1 for 0 index
+        $message["{$rowNum}.".$field.".required"] = "The field {$field} at row: {$actual_row} is required";
+        if($field == 'name'){
+            $message["{$rowNum}.".$field.".string"] = "The field {$field} at row: {$actual_row} must be a string";
+        }
+        if($field == "email"){
+            $message["{$rowNum}.".$field.".email"] = "The field {$field} at row: {$actual_row} must be a valid email address";
+        }
+        if($field == "mobile"){
+            $message["{$rowNum}." . $field.".unique"] = "The field {$field}: {$value} at row: {$actual_row} already exists in database";
+        }
+
+    }
+}
+        // dd($message);
+$validator = Validator::make($data,[
+    '*.name' => 'required|string|min:1',
+    '*.mobile' => 'required|numeric|unique:trainees,mobile|digits:10',
+    '*.email' => 'required|email',
+    '*.address' => 'required|string|min:1',
+], $message,
+[
+    '*.name' => 'Name',
+    '*.mobile' => "Mobile",
+    '*.email' => "Email",
+    '*.address' => "Address",
+
+]);
+
+$validator->validate();
+
+// https://beyondco.de/blog/writing-and-testing-custom-validators-in-laravel

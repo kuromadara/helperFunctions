@@ -43,3 +43,7 @@ if(isSame){
   //code block here
 
 }
+
+// volley request sent twice on slow connection Error
+
+https://stackoverflow.com/questions/41493203/volley-requests-are-being-sent-twice
