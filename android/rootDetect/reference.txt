@@ -1,0 +1,5 @@
+https://medium.com/mobile-app-development-publication/keep-your-keys-outside-manifest-and-gradle-ba44110bafca
+https://medium.com/@deekshithmoolyakavoor/root-detection-in-android-device-9144b7c2ae07
+https://www.appknox.com/blog/root-detection-techniques
+https://mobile-security.gitbook.io/mobile-security-testing-guide/android-testing-guide/0x05j-testing-resiliency-against-reverse-engineering
+https://androidcracking.blogspot.com/2011/06/anti-tampering-with-crc-check.html
