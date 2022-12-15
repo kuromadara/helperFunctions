@@ -1,0 +1,9 @@
+How to use a hexadecimal color code #B74093 in Flutter
+
+Simply remove the # sign from the hexadecimal color code and add 0xFF with the color code inside the Color class:
+
+#b74093 will become Color(0xffb74093) in Flutter
+
+#B74093 will become Color(0xFFB74093) in Flutter
+
+The ff or FF in Color(0xFFB74093) defines the opacity.
