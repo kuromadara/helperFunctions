@@ -7,3 +7,8 @@ Simply remove the # sign from the hexadecimal color code and add 0xFF with the c
 #B74093 will become Color(0xFFB74093) in Flutter
 
 The ff or FF in Color(0xFFB74093) defines the opacity.
+
+
+// Model guide
+
+https://medium.com/flutter-community/parsing-complex-json-in-flutter-747c46655f51
