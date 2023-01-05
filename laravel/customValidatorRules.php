@@ -105,3 +105,23 @@ $validator = Validator::make($data,[
 $validator->validate();
 
 // https://beyondco.de/blog/writing-and-testing-custom-validators-in-laravel
+
+
+// the below validation 
+
+$request->validate(
+		[
+			'username' => 'exists:users',
+		]
+	);
+
+    $request->validate(
+    	[
+      	'username' => 'exists:users,status,status,1',
+      	'password' => 'required',
+      	'captcha' => 'required|captcha',
+	],
+	[
+     		'username' . '.exists' => 'The username is deactivated.',
+	]
+);
