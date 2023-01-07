@@ -107,7 +107,7 @@ $validator->validate();
 // https://beyondco.de/blog/writing-and-testing-custom-validators-in-laravel
 
 
-// the below validation 
+// the below validation first check if the user exist if exist then check status and sends a custom messsage.
 
 $request->validate(
 		[
@@ -117,7 +117,7 @@ $request->validate(
 
     $request->validate(
     	[
-      	'username' => 'exists:users,status,status,1',
+      	'username' => 'exists:users,username,status,1',
       	'password' => 'required',
       	'captcha' => 'required|captcha',
 	],
