@@ -48,11 +48,11 @@ https://stackoverflow.com/questions/49834437/how-can-i-install-debugbar-in-larav
  **/
 
 
-// max character violation on migration 
+// max character violation on migration
 
-add 
+add
 
 'engine' => 'InnoDB',
 
-on config.php and run 
+on config/database.php and run
 php artisan config:clear
