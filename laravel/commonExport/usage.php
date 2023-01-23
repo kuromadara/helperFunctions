@@ -23,14 +23,11 @@ $headings = [];
 // change the names of headings
 
 foreach ($selectedColumns as $column) {
-    if ($column == 'Id') {
-        $headings[] = '#';
-    }
-    if ($column == 'user_id') {
-        $headings[] = 'Username';
-    }
     $headings[] = ucwords(str_replace(['_', 'id'], ' ', $column));
 }
+
+$headings[0] = '#';
+$heading[1] = 'Username';
 
 $model = "App\Models\DomesticHelp";
 
