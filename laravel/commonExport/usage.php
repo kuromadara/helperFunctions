@@ -27,7 +27,7 @@ foreach ($selectedColumns as $column) {
 }
 
 $headings[0] = '#';
-$heading[1] = 'Username';
+$headings[2] = 'Username';
 
 $model = "App\Models\DomesticHelp";
 
