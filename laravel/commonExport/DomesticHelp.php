@@ -45,4 +45,10 @@ class DomesticHelp extends Model
     {
         return $this->hasOne(Nationality::class, 'id', 'nationality_id');
     }
+
+    public function getFullNameAttribute()
+    {
+        return $this->title . ' ' . $this->name;
+    }
+
 }

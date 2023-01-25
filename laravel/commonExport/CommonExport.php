@@ -2,14 +2,11 @@
 
 namespace App\Exports;
 
-use Barryvdh\Debugbar\Twig\Extension\Dump;
-use Illuminate\Support\Facades\Schema;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithStyles;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
-use Termwind\Components\Dd;
 
 class CommonExport implements FromCollection, WithHeadings, WithStyles
 {
@@ -23,13 +20,17 @@ class CommonExport implements FromCollection, WithHeadings, WithStyles
     private $headings;
     private $model;
     private $relations;
+    private $attributes;
+    private $unsetColumn;
 
-    public function __construct($selectedColumns, $headings, $model, $relations)
+    public function __construct($selectedColumns, $headings, $model, $relations=null, $attributes=null, $unsetColumn=null)
     {
         $this->selectedColumns = $selectedColumns;
         $this->headings = $headings;
         $this->model = $model;
         $this->relations = $relations;
+        $this->attributes = $attributes;
+        $this->unsetColumn = $unsetColumn;
     }
 
     public function headings(): array
@@ -41,31 +42,26 @@ class CommonExport implements FromCollection, WithHeadings, WithStyles
     public function collection()
     {
 
-        $data =  $this->model::select($this->selectedColumns)->get();
-
-        /**
-        * The code comented below is for staticaly fetch the relation
-        */
-
-        // foreach ($data as &$item) {
-        //     $item->user_id = $item->user->name;
-        //     $item->district_id = $item->district->name;
-        //     $item->perma_district_id = $item->perma_district->name;
-        //     $item->police_station_id = $item->police_station->name;
-        //     $item->perma_police_station_id = $item->perma_police_station->name;
-        //     $item->nationality_id = $item->nationality->name;
-        // }
-
-
-        /**
-        * The code comented below is for dynamically fetch the relation
-        */
-
+        // add select is used to add the title column
+        $data =  $this->model::select($this->selectedColumns)->addSelect($this->unsetColumn)->get();
         foreach ($data as &$item) {
-            foreach($this->relations as $relation) {
+            foreach ($this->relations as $relation) {
                 $item->{$relation['id']} = $item->{$relation['relation']}->name;
             }
         }
+
+        foreach ($data as &$item) {
+            foreach ($this->attributes as $attribute) {
+                $item->{$attribute['id']} = $item->{$attribute['attribute']};
+            }
+        }
+
+        // addSelect is removed here from the colloction
+        $data = $data->map(function($item){
+            unset($item->{$this->unsetColumn});
+            return $item;
+        });
+
         return $data;
     }
 
