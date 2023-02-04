@@ -1,3 +1,24 @@
 // hex color code in flutter
 
 https://www.flutterbeads.com/using-hexadecimal-color-code-flutter/
+
+
+// flutter google signin
+
+/**
+* Step 1
+*/
+
+//https://firebase.google.com/docs/flutter/setup?platform=ios
+
+/**
+* Step 2
+*/
+
+// https://firebase.google.com/docs/auth/flutter/federated-auth
+
+//
+/**
+* Outdated need reference for the pages
+*/
+//https://www.kindacode.com/article/flutter-set-gradient-background-color-for-entire-screen/
