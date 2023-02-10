@@ -42,25 +42,35 @@ class CommonExport implements FromCollection, WithHeadings, WithStyles
     public function collection()
     {
 
-        // add select is used to add the title column
-        $data =  $this->model::select($this->selectedColumns)->addSelect($this->unsetColumn)->get();
-        foreach ($data as &$item) {
-            foreach ($this->relations as $relation) {
-                $item->{$relation['id']} = $item->{$relation['relation']}->name;
+        if($this->unsetColumn){
+            $data =  $this->model::select($this->selectedColumns)->get();
+        } else {
+            $data =  $this->model::select($this->selectedColumns)->get();
+        }
+        if($this->relations){
+            foreach ($data as &$item) {
+                foreach ($this->relations as $relation) {
+                    $item->{$relation['id']} = $item->{$relation['relation']}->name;
+                }
             }
         }
 
-        foreach ($data as &$item) {
-            foreach ($this->attributes as $attribute) {
-                $item->{$attribute['id']} = $item->{$attribute['attribute']};
+        if($this->attributes){
+            foreach ($data as &$item) {
+                foreach ($this->attributes as $attribute) {
+                    $item->{$attribute['id']} = $item->{$attribute['attribute']};
+                }
             }
         }
 
-        // addSelect is removed here from the colloction
-        $data = $data->map(function($item){
-            unset($item->{$this->unsetColumn});
-            return $item;
-        });
+        if($this->unsetColumn){
+            $data = $data->map(function($item){
+                foreach($this->unsetColumn as $column){
+                    unset($item->{$column});
+                }
+                return $item;
+            });
+        }
 
         return $data;
     }
@@ -68,7 +78,6 @@ class CommonExport implements FromCollection, WithHeadings, WithStyles
     public function styles(Worksheet $sheet)
     {
         return [
-
             1    => ['font' => ['bold' => true]],
         ];
     }

@@ -56,3 +56,10 @@ add
 
 on config/database.php and run
 php artisan config:clear
+
+
+//reset permission cache after adding permission
+
+sudo php artisan permission:cache-reset
+
+https://stackoverflow.com/questions/49086974/spatie-laravel-permission-there-is-no-permission-named-edit-project-for-guard

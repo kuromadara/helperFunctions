@@ -3,7 +3,6 @@ $item = DomesticHelp::where('id', 1)->first();
 $users_table_columns = array_keys($item->getAttributes());
 
 $exclude_columns = [
-   'title',
    'employeed_before',
    'identity_proof_file',
    'passport_size_photo',
