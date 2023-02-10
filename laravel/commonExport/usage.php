@@ -20,7 +20,7 @@ $exclude_columns = [
 
 $selectedColumns = array_diff($users_table_columns, (array) $exclude_columns);
 
-$unsetColumn = "title";
+$unsetColumn = ["title"];
 
 // unsetColumn is sent because title is required for full_name attribute
 
