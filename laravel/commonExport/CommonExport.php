@@ -47,6 +47,19 @@ class CommonExport implements FromCollection, WithHeadings, WithStyles
         } else {
             $data =  $this->model::select($this->selectedColumns)->get();
         }
+
+        /**
+        * If column name is also sent check the comented code below
+        */
+
+        // if($this->relations){
+        //     foreach ($data as &$item) {
+        //         foreach ($this->relations as $relation) {
+        //             $item->{$relation['id']} = $item->{$relation['relation']}->{$relation['column']};
+        //         }
+        //     }
+        // }
+
         if($this->relations){
             foreach ($data as &$item) {
                 foreach ($this->relations as $relation) {
