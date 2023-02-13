@@ -71,6 +71,15 @@ $headings = [
 
 $model = "App\Models\DomesticHelp";
 
+/**
+* Column names can also be sent sheck the comented code below
+*/
+
+<!-- $relations = [
+            ['id' => 'employee_id', 'relation' => 'employee', 'column' => 'full_name'],
+            ['id' => 'vehicle_type_id', 'relation' => 'ltes', 'column' => 'name'],
+        ]; -->
+
 $relations = [
    ['id' => 'user_id', 'relation' => 'user'],
    ['id' => 'district_id', 'relation' => 'district'],
