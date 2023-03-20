@@ -1,0 +1,51 @@
+import 'dart:async';
+
+import 'package:flutter/services.dart';
+import 'package:flutter_background_service/flutter_background_service.dart';
+import 'package:auto_start_flutter/auto_start_flutter.dart';
+
+Future<void> initializeService() async {
+  final service = FlutterBackgroundService();
+
+  await service.configure(
+    androidConfiguration: AndroidConfiguration(
+      onStart: onStart,
+      autoStart: true,
+      isForegroundMode: true,
+    ),
+    iosConfiguration: IosConfiguration(
+      autoStart: true,
+      onForeground: onStart,
+      onBackground: onIosBackground,
+    ),
+  );
+  service.startService();
+}
+
+@pragma('vm:entry-point')
+void onStart(ServiceInstance service) async {
+  print('Service started');
+}
+
+@pragma('vm:entry-point')
+Future<bool> onIosBackground(ServiceInstance service) async {
+  return true;
+}
+
+/**
+ * Auto start service on boot
+ */
+
+Future<void> initAutoStart() async {
+  try {
+    //check auto-start availability.
+    bool test = false;
+    test = (await (isAutoStartAvailable))!;
+    print("auto start available: ");
+    print(test);
+    //if available then navigate to auto-start setting page.
+    if (test) await getAutoStartPermission();
+  } on PlatformException catch (e) {
+    print(e);
+  }
+}
