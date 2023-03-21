@@ -11,3 +11,5 @@ adb logcat | findstr anything
 https://stackoverflow.com/questions/6854127/filter-logcat-to-get-only-the-messages-from-my-application-in-android
 
 adb logcat | findstr com.techvariable.networktravels
+
+adb logcat | findstr com.example.panic_call
