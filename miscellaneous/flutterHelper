@@ -25,3 +25,19 @@ https://www.flutterbeads.com/using-hexadecimal-color-code-flutter/
 * Outdated need reference for the pages
 */
 //https://www.kindacode.com/article/flutter-set-gradient-background-color-for-entire-screen/
+
+// Flutter dotenv
+
+cli tool
+
+$ dart pub global activate dotenv
+
+$ dart pub global run dotenv:new  # create a .env file and add it to .gitignore
+$ dart pub global run dotenv      # load the file and print only the file environment variables to stdout
+$ dart pub global run dotenv -p   # load the file and print all the environment variables to stdout
+
+https://pub.dev/packages/dotenv
+
+flutter dotenv
+
+https://pub.dev/packages/flutter_dotenv
