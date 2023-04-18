@@ -12,4 +12,4 @@ https://stackoverflow.com/questions/6854127/filter-logcat-to-get-only-the-messag
 
 adb logcat | findstr com.techvariable.networktravels
 
-adb logcat | findstr com.example.panic_call
+adb logcat | findstr com.web.bhoroxa
