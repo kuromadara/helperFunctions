@@ -13,4 +13,7 @@ https://stackoverflow.com/questions/44192418/how-to-find-mysql-process-list-and-
 
 ## join example
 
-SELECT employees.code, `first_name`,`middle_name`,`last_name`, departments.name FROM `employees` JOIN `departments` ON employees.department_id = departments.id WHERE `datetime_of_joining` > '2016-12-31 14:15:29' 
+SELECT employees.code, `first_name`,`middle_name`,`last_name`, departments.name FROM `employees` JOIN `departments` ON employees.department_id = departments.id WHERE `datetime_of_joining` > '2016-12-31 14:15:29'
+
+## created at 2023 all records
+SELECT * FROM `students` WHERE LEFT(created_at,4)=2023 ORDER BY `created_at` DESC;
