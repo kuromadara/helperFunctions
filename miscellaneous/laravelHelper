@@ -63,3 +63,8 @@ php artisan config:clear
 sudo php artisan permission:cache-reset
 
 https://stackoverflow.com/questions/49086974/spatie-laravel-permission-there-is-no-permission-named-edit-project-for-guard
+
+
+// job laravel file upload
+
+https://techsolutionstuff.com/post/laravel-9-upload-large-csv-file-using-queue
