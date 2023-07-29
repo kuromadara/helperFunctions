@@ -13,13 +13,9 @@ class RegisterService extends ChangeNotifier {
     request.fields.addAll(registerPost.toFormData());
 
     // Add the image file to the request if available
-    if (registerPost.imageFile != null) {
-      request.files.add(http.MultipartFile(
-        'image',
-        http.ByteStream(Stream.castFrom(registerPost.imageFile!.openRead())),
-        await registerPost.imageFile!.length(),
-        filename: registerPost.imageFile!.path.split('/').last,
-      ));
+    var imageMultipartFile = registerPost.getImageMultipartFile();
+    if (imageMultipartFile != null) {
+      request.files.add(imageMultipartFile);
     }
 
     final response = await request.send();

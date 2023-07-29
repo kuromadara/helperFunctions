@@ -34,11 +34,19 @@ class RegisterPost {
       'is_police': isPolice
     };
 
-    // Add the image file to the form data if available
-    if (imageFile != null) {
-      formData['image'] = http.MultipartFile.fromFileSync(imageFile!.path);
-    }
-
     return formData;
+  }
+
+  http.MultipartFile? getImageMultipartFile() {
+    if (imageFile != null) {
+      String fileName = imageFile!.path.split('/').last;
+      return http.MultipartFile(
+        'image',
+        imageFile!.readAsBytes().asStream(),
+        imageFile!.lengthSync(),
+        filename: fileName,
+      );
+    }
+    return null;
   }
 }
