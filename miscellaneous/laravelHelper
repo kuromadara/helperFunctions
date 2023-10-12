@@ -73,3 +73,15 @@ https://techsolutionstuff.com/post/laravel-9-upload-large-csv-file-using-queue
 // laravel socialite sanctum api
 
 https://bipinmhz.medium.com/sanctum-with-socialite-api-authentication-via-social-networks-in-laravel-8-624cb1737e8
+
+// laravel sanctum custom auth error
+
+Add to ExceptionHandler@register app/Exceptions/ExceptionHandler.php
+
+$this->renderable(function (\Illuminate\Auth\AuthenticationException $e, $request) {
+    if ($request->is('api/*')) {
+        return response()->json([
+            'message' => 'Not authenticated'
+        ], 401);
+    }
+});
