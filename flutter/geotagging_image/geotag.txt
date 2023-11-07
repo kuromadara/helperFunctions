@@ -27,3 +27,5 @@ Stack(
 // another methods
 
 https://singhudit245.medium.com/flutter-creating-geotag-image-cf94080f379d
+
+https://medium.com/flutter-community/add-watermark-over-image-in-flutter-e7353e3cf603
