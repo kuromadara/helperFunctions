@@ -17,3 +17,17 @@ SELECT employees.code, `first_name`,`middle_name`,`last_name`, departments.name 
 
 ## created at 2023 all records
 SELECT * FROM `students` WHERE LEFT(created_at,4)=2023 ORDER BY `created_at` DESC;
+
+
+// export data single import statement for multiple row reduce import performance
+
+
+with the following statement:
+
+mysqldump --complete-insert --lock-all-tables --no-create-db
+--no-create-info --extended-insert --password=XXX -u XXX
+--dump-date yyy > yyy_dataOnly.sql
+
+I get INSERT statements like the following:
+
+INSERT INTO `table` VALUES (1,'something'),(2,'anything'),(3,'everything');
