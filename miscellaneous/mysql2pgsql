@@ -11,3 +11,21 @@ wsl
 2. pg_hba.conf add ip and host
 3. run
       ./build/bin/pgloader mysql://migrate:migrate@192.168.0.100/police_app postgresql://postgres:123456@192.168.0.100/police_app
+
+
+if heap size get filled
+
+1. create a file called migration.load
+
+      LOAD DATABASE
+           FROM mysql://migrate:migrate@192.168.0.100/police_app
+           INTO postgresql://postgres:123456@192.168.0.100/police_app
+
+      WITH prefetch rows = 100,
+           max parallel create index = 1;
+
+2. run
+
+      ./build/bin/pgloader ./build/bin/migration.load
+
+*here i have created the migration.load in ./build/bin/ directory provide the full path
