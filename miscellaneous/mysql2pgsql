@@ -1,0 +1,13 @@
+wsl
+
+1. build pgloader
+      apt remove pgloader -y
+      git clone https://github.com/dimitri/pgloader.git
+      apt-get install sbcl unzip libsqlite3-dev make curl gawk freetds-dev libzip-dev
+      cd /path/to/pgloader
+      make pgloader
+      ./build/bin/pgloader --help
+
+2. pg_hba.conf add ip and host
+3. run
+      ./build/bin/pgloader mysql://migrate:migrate@192.168.0.100/police_app postgresql://postgres:123456@192.168.0.100/police_app
