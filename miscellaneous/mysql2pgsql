@@ -29,3 +29,16 @@ if heap size get filled
       ./build/bin/pgloader ./build/bin/migration.load
 
 *here i have created the migration.load in ./build/bin/ directory provide the full path
+
+Another issue could be migrate to different schema to fix this modify the migration.load
+
+      LOAD DATABASE
+           FROM mysql://migrate:migrate@192.168.0.100/police_app
+           INTO postgresql://postgres:123456@192.168.0.100/police_app
+
+      WITH prefetch rows = 100,
+           max parallel create index = 1
+
+      SET work_mem to '64MB', maintenance_work_mem to '128MB'
+
+      TARGET SCHEMA 'public';
