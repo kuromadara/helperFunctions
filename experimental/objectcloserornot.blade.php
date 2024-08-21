@@ -171,26 +171,26 @@
 
         // Function to check if the meter is too far based on image size
         function isMeterTooFar(canvas, threshold = 100) { // Lowered the threshold
-          const width = canvas.width;
-          const height = canvas.height;
-          const context = canvas.getContext('2d');
-          const imageDataArray = context.getImageData(0, 0, width, height).data;
+            const width = canvas.width;
+            const height = canvas.height;
+            const context = canvas.getContext('2d');
+            const imageDataArray = context.getImageData(0, 0, width, height).data;
 
-          let totalBrightness = 0;
-          for (let i = 0; i < imageDataArray.length; i += 4) {
-              const r = imageDataArray[i];
-              const g = imageDataArray[i + 1];
-              const b = imageDataArray[i + 2];
-              const brightness = 0.299 * r + 0.587 * g + 0.114 * b;
-              totalBrightness += brightness;
-          }
+            let totalBrightness = 0;
+            for (let i = 0; i < imageDataArray.length; i += 4) {
+                const r = imageDataArray[i];
+                const g = imageDataArray[i + 1];
+                const b = imageDataArray[i + 2];
+                const brightness = 0.299 * r + 0.587 * g + 0.114 * b;
+                totalBrightness += brightness;
+            }
 
-          const averageBrightness = totalBrightness / (width * height);
+            const averageBrightness = totalBrightness / (width * height);
 
-          console.log("Average Brightness:", averageBrightness); // Log the brightness value for debugging
+            console.log("Average Brightness:", averageBrightness); // Log the brightness value for debugging
 
-          return averageBrightness < threshold;
-      }
+            return averageBrightness < threshold;
+        }
 
         // Capture the image from the video stream
         captureButton.addEventListener('click', function () {
