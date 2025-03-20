@@ -1,0 +1,18 @@
+https://stackoverflow.com/questions/24005828/how-to-enable-local-network-users-to-access-my-wamp-sites
+
+
+You must have the Apache process (httpd.exe) allowed through firewall (recommended).
+
+Or disable your firewall on LAN (just to test, not recommended).
+
+Example with Wamp (with Apache activated):
+
+    Check if Wamp is published locally if it is, continue;
+    Access Control Panel
+    Click "Firewall"
+    Click "Allow app through firewall"
+    Click "Allow some app"
+    Find and choose C:/wamp64/bin/apache2/bin/httpd.exe
+    Restart Wamp
+
+Now open the browser in another host of your network and access your Apache server by IP (e.g. 192.168.0.5). You can discover your local host IP by typing ipconfig on your command prompt.

@@ -1,0 +1,31 @@
+
+
+You need to get the coordinates and name location from that coordinates. To get coordinates use geolocator. Example:
+
+Geolocator.Position position = await Geolocator.Geolocator.getCurrentPosition(
+              desiredAccuracy: Geolocator.LocationAccuracy.high);
+// where position has lat and lang -> LatLng(position.latitude, position.longitude)
+
+And to parse coordinates to location name use geocoder. Example:
+
+// From coordinates
+final coordinates = new Coordinates(1.10, 45.50); // <- here set coordinates
+addresses = await Geocoder.local.findAddressesFromCoordinates(coordinates);
+first = addresses.first;
+print("${first.featureName} : ${first.addressLine}");
+
+To print location like watermark into image just set Stack as parent of image:
+
+Stack(
+    children: <Widget>[
+        yourImage,
+        Center(child: Text("text")),
+    ]
+)
+
+
+// another methods
+
+https://singhudit245.medium.com/flutter-creating-geotag-image-cf94080f379d
+
+https://medium.com/flutter-community/add-watermark-over-image-in-flutter-e7353e3cf603

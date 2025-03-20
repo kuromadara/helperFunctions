@@ -105,3 +105,23 @@ $validator = Validator::make($data,[
 $validator->validate();
 
 // https://beyondco.de/blog/writing-and-testing-custom-validators-in-laravel
+
+
+// the below validation first check if the user exist if exist then check status and sends a custom messsage.
+
+$request->validate(
+		[
+			'username' => 'exists:users',
+		]
+	);
+
+    $request->validate(
+    	[
+      	'username' => 'exists:users,username,status,1',
+      	'password' => 'required',
+      	'captcha' => 'required|captcha',
+	],
+	[
+     		'username' . '.exists' => 'The username is deactivated.',
+	]
+);

@@ -1,0 +1,18 @@
+to use multiple repo
+
+https://stackoverflow.com/questions/849308/how-can-i-pull-push-from-multiple-remote-locations
+
+
+to push:
+
+apl Example:
+
+push to github:
+
+git push github
+
+push to bit bucket
+
+git push origin latest_serve
+
+// here origin is bitbucket and github is github
