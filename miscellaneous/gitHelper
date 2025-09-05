@@ -3,3 +3,16 @@ clear git windows
 rmdir /s .git
 
 https://www.nobledesktop.com/learn/git/stage-commit-files
+
+multiple remote with code in both remote : https://chatgpt.com/share/68b97d14-c9b4-8007-9aee-86551d904e2d
+
+copy code from one remote branch to another
+
+switch to remote where you want to copy
+
+
+git checkout from-where-to-copy -- directory
+git checkout main -- application/controllers/
+
+
+
